@@ -27,6 +27,8 @@ def run():
         page_title="Tobacco",
         page_icon="🚬",
     )
+    
+    st.link_button("Back To Project", "https://journeygenius.pythonanywhere.com/tobacco")
 
     df = pd.read_csv('tobacco_analysis.csv')
 
@@ -377,6 +379,7 @@ def run():
 
 
     # Map Visualization
+    st.link_button("Back To Project", "https://journeygenius.pythonanywhere.com/tobacco")
 
 
 
