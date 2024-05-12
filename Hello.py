@@ -256,7 +256,7 @@ def run():
 
     col11, col22 = st.columns(2)
 
-    Year = col11.number_input("Year", min_value=0, value=2022)
+    Year = col11.number_input("Year", min_value=2011, max_value=2022, value=2022)
     State = col11.number_input("State", min_value=0, max_value=50, value=50)
     Demographic = col22.number_input("Demographic", min_value=0, max_value=8, value=8)
     Comparing = col22.number_input("Comparing", min_value=0, max_value=28, value=28)
