@@ -31,24 +31,33 @@ def run():
     st.link_button("Back To Project", "https://journeygenius.pythonanywhere.com/tobacco")
 
     df = pd.read_csv('tobacco_analysis.csv')
+    df.dropna(inplace=True)
 
     st.title("Tobacco Use Prevalence Analysis")
 
-    # Additional Insights
-    st.subheader('Additional Insights')
+    # Model
+    st.subheader('Get Prediction')
     # Year with the highest cigarette use prevalence
     highest_prevalence_year = df.loc[df['Cigarette Use Prevalence % (Focus group)'].idxmax()]['Year']
     highest_prevalence_value = df['Cigarette Use Prevalence % (Focus group)'].max()
     highest_prevalence_state = df.loc[df['Cigarette Use Prevalence % (Focus group)'].idxmax()]['State']
+    
+    lowest_prevalence_year = df.loc[df['Cigarette Use Prevalence % (Focus group)'].idxmin()]['Year']
+    lowest_prevalence_value = df['Cigarette Use Prevalence % (Focus group)'].min()
+    lowest_prevalence_state = df.loc[df['Cigarette Use Prevalence % (Focus group)'].idxmin()]['State']
+    
+    
 
     with st.sidebar:
         # Display the information
         st.title('Cigarette Use Prevalence Analysis')
         st.header('Statistics')
-        st.info(
+        st.success(
             f"The year with the highest cigarette use prevalence was {highest_prevalence_year} with a prevalence of {highest_prevalence_value}%.")
-        st.success(f"The state with the highest cigarette use prevalence was {highest_prevalence_state}.")
-
+        st.info(f"The state with the highest cigarette use prevalence was {highest_prevalence_state}.")
+        st.warning(
+            f"The year with the lowest cigarette use prevalence was {lowest_prevalence_year} with a prevalence of {lowest_prevalence_value}%.")
+        st.error(f"The state with the lowest cigarette use prevalence was {lowest_prevalence_state}.")
 
     state_data = {
         "Alabama": 0,
@@ -255,7 +264,7 @@ def run():
 
 
 
-
+    # model form
     col11, col22 = st.columns(2)
 
     Year = col11.number_input("Year", min_value=2011, max_value=2022, value=2022)
@@ -282,6 +291,10 @@ def run():
     state_avg = df.groupby('State')['Cigarette Use Prevalence % (Focus group)'].mean().reset_index()
     bar_chart = px.bar(state_avg, x='State', y='Cigarette Use Prevalence % (Focus group)',
                       title='Average Cigarette Use Prevalence by State')
+    bar_chart.update_layout(
+        xaxis_title= 'State',
+        yaxis_title= 'Prevalence',
+        )
 
     st.plotly_chart(bar_chart)
 
@@ -379,7 +392,7 @@ def run():
 
 
     # Map Visualization
-    st.link_button("Back To Project", "https://journeygenius.pythonanywhere.com/tobacco")
+    st.link_button("View More Info", "https://journeygenius.pythonanywhere.com/tobacco")
 
 
 
