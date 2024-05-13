@@ -293,7 +293,7 @@ def run():
                       title='Average Cigarette Use Prevalence by State')
     bar_chart.update_layout(
         xaxis_title= 'State',
-        yaxis_title= 'Prevalence',
+        yaxis_title= 'Prevalence %',
         )
 
     st.plotly_chart(bar_chart)
@@ -316,7 +316,7 @@ def run():
     bar_chart_demo = px.bar(demo_avg, x='Demographic', y='Cigarette Use Prevalence % (Focus group)',
                             title='Average Cigarette Use Prevalence by Demographic Group')
 
-
+    st.plotly_chart(bar_chart_demo)
     # Line chart displaying trends in cigarette use prevalence over the years for specific demographic groups
 
 
@@ -373,7 +373,7 @@ def run():
 
     with col1:
         st.plotly_chart(line_chart_demo)
-        st.plotly_chart(bar_chart_demo)
+        
 
     with col2:
 
