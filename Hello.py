@@ -328,12 +328,25 @@ def run():
 
 
 
+   # selected_demo = st.selectbox('Select Demographic Group:', df['Demographic'].unique())
+  #  demo_data = df[df['Demographic'] == selected_demo]
+
+   # demo_trends = demo_data.groupby('Year')['Cigarette Use Prevalence % (Focus group)'].mean().reset_index()
+   # line_chart_demo = px.line(demo_trends, x='Year', y='Cigarette Use Prevalence % (Focus group)',
+                        #      title=f'Cigarette Use Prevalence Trend for {selected_demo}')
+
+
     selected_demo = st.selectbox('Select Demographic Group:', df['Demographic'].unique())
     demo_data = df[df['Demographic'] == selected_demo]
 
-    demo_trends = demo_data.groupby('Year')['Cigarette Use Prevalence % (Focus group)'].mean().reset_index()
+    # Group by 'Year' and 'Demographic Comparing (Focus group)', calculate mean prevalence
+    demo_trends = demo_data.groupby(['Year', 'Demographic Comparing (Focus group)'])['Cigarette Use Prevalence % (Focus group)'].mean().reset_index()
+
+    # Plotting
     line_chart_demo = px.line(demo_trends, x='Year', y='Cigarette Use Prevalence % (Focus group)',
-                              title=f'Cigarette Use Prevalence Trend for {selected_demo}')
+                            title=f'Cigarette Use Prevalence Trend for {selected_demo}',
+                            color='Demographic Comparing (Focus group)')
+
 
     line_chart_demo.update_layout(
         xaxis_title='Year',
