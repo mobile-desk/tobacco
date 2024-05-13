@@ -335,7 +335,14 @@ def run():
     line_chart_demo = px.line(demo_trends, x='Year', y='Cigarette Use Prevalence % (Focus group)',
                               title=f'Cigarette Use Prevalence Trend for {selected_demo}')
 
-
+    line_chart_demo.update_layout(
+        xaxis_title='Year',
+        yaxis_title='Prevalence %',
+        )
+    
+    st.plotly_chart(line_chart_demo)
+    
+    
 
     # Comparative Analysis
 
@@ -344,6 +351,9 @@ def run():
     scatter_plot = px.scatter(df, x='Comparing (Focus group)', y='Cigarette Use Prevalence % (Focus group)',
                               color='Demographic', title='Comparative Cigarette Use Prevalence')
 
+    st.plotly_chart(scatter_plot)
+    
+    
     # Box plot showing the distribution of cigarette use prevalence for each demographic group
     box_plot = px.box(df, x='Demographic', y='Cigarette Use Prevalence % (Focus group)',
                       title='Distribution of Cigarette Use Prevalence by Demographic Group')
@@ -379,7 +389,7 @@ def run():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.plotly_chart(line_chart_demo)
+        
         
 
     with col2:
@@ -390,7 +400,7 @@ def run():
     col3, col4 = st.columns(2)
 
     with col3:
-        st.plotly_chart(scatter_plot)
+        
         st.plotly_chart(box_plot)
 
     with col4:
