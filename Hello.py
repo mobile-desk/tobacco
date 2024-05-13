@@ -340,12 +340,12 @@ def run():
     demo_data = df[df['Demographic'] == selected_demo]
 
     # Group by 'Year' and 'Demographic Comparing (Focus group)', calculate mean prevalence
-    demo_trends = demo_data.groupby(['Year', 'Demographic Comparing (Focus group)'])['Cigarette Use Prevalence % (Focus group)'].mean().reset_index()
+    demo_trends = demo_data.groupby(['Year', 'Comparing (Focus group)'])['Cigarette Use Prevalence % (Focus group)'].mean().reset_index()
 
     # Plotting
     line_chart_demo = px.line(demo_trends, x='Year', y='Cigarette Use Prevalence % (Focus group)',
                             title=f'Cigarette Use Prevalence Trend for {selected_demo}',
-                            color='Demographic Comparing (Focus group)')
+                            color='Comparing (Focus group)')
 
 
     line_chart_demo.update_layout(
